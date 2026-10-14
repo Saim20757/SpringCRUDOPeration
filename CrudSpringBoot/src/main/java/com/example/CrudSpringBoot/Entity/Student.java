@@ -59,6 +59,6 @@ public class Student {
     }
 
     public void setSubject(String subject) {
-        Subject = subject;
+        this.Subject = subject;
     }
 }

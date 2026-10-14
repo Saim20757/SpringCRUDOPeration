@@ -5,6 +5,9 @@ import com.example.CrudSpringBoot.Repository.StudentRepository;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Optional;
+
 @Service
 public class StudentService {
 
@@ -17,12 +20,26 @@ public class StudentService {
     public Student createStudent(Student studentreq){
       //Store To db
         // Business logic
-        System.out.println("Inside Student Service");
 
-    Student studentres =studentRepository.saveStudent(studentreq);
-        System.out.println("Exiting  Student Service");
+
+    Student studentres =studentRepository.save(studentreq);
+
     return  studentres;
     }
+    public Student getStudent(Long id){
+        Optional<Student> studentResp=studentRepository.findById(id);
+        if (studentResp.isPresent()){
+            return studentResp.get();
+        }
+        return null;
+
+    }
+    public List<Student> getAllStudent(){
+        List<Student> studentList=studentRepository.findAll();
+        return studentList;
+
+    }
+
 
 
 

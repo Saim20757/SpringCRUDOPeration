@@ -2,11 +2,11 @@ package com.example.CrudSpringBoot.Controller;
 
 import com.example.CrudSpringBoot.Entity.Student;
 import com.example.CrudSpringBoot.Service.StudentService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/students")
@@ -22,15 +22,29 @@ public class StudentController {
     @PostMapping("/create")
     public Student createStudent(@RequestBody Student student){
 //        System.out.println(student.getName()+student.getEmail());
-        System.out.println("Inside Student Controller");
+
         Student createdStudent=studentService.createStudent(student);
 
-        System.out.println("Existing Student Controller");
+
        return createdStudent ;
 
     }
     //Read Student//Read One//HTTp Request-->GET //End point -->/api/students/get/{id}
-                  //Read All//SHttp Request -->GET//End point -->/api/students/getAll
+
+    @PostMapping("/get/{id}")
+    public  Student getStudent(@PathVariable Long id)
+    {
+     Student studentResp=studentService.getStudent(id);
+        return studentResp;
+    }
+    //Read All//SHttp Request -->GET//End point -->/api/students/getAll
+    @PostMapping("/getAll")
+    public List<Student> getAllStudent()
+    {
+        List<Student> studentlist=studentService.getAllStudent();
+        return studentlist;
+    }
+
 
 
     //Update Student //Update//Http Request-->PUT//Endpoint -->/api/students/update/{id}

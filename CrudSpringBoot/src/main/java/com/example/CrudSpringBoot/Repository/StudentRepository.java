@@ -2,23 +2,19 @@ package com.example.CrudSpringBoot.Repository;
 
 import com.example.CrudSpringBoot.Entity.Student;
 import org.springframework.context.annotation.Bean;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
-@Component
-public class StudentRepository {
-
-    public Student saveStudent (Student studentrReq){
-        //Save To DB
-
-        System.out.println("Inside Student Repository");
-        System.out.println("Exiting Student Repository");
-
-        Student s1=new Student();
-        s1.setName("Saim");
-        s1.setAge(29);
-        s1.setEmail("saimnao@gmail.com");
-        s1.setRollNumber(60);
-        s1.setSubject("Biology");
-        return s1;
-    }
+@Repository
+public interface StudentRepository extends JpaRepository<Student,Long> {
+    //Save To DB/
+//        Methods
+//        Create -->save()-->Insert into the table
+//        Read All-->findAll()-->Select* from the table
+//        Read One-->find()-->select * from where
+//        Delete-->DeleteByID()
+//         Update-->Save()
+//                 --.ExistByID()
 }
+
