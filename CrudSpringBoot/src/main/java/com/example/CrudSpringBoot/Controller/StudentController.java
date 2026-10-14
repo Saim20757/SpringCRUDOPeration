@@ -31,14 +31,14 @@ public class StudentController {
     }
     //Read Student//Read One//HTTp Request-->GET //End point -->/api/students/get/{id}
 
-    @PostMapping("/get/{id}")
+    @GetMapping("/get/{id}")
     public  Student getStudent(@PathVariable Long id)
     {
      Student studentResp=studentService.getStudent(id);
         return studentResp;
     }
     //Read All//SHttp Request -->GET//End point -->/api/students/getAll
-    @PostMapping("/getAll")
+    @GetMapping ("/getAll")
     public List<Student> getAllStudent()
     {
         List<Student> studentlist=studentService.getAllStudent();
@@ -48,7 +48,12 @@ public class StudentController {
 
 
     //Update Student //Update//Http Request-->PUT//Endpoint -->/api/students/update/{id}
-
+    @PutMapping("/update/{id}")
+    public  Student updateStudent(@PathVariable Long id,@RequestBody Student studentReq)
+    {
+        Student studentResp=studentService.updateStudent(id,studentReq);
+        return studentResp;
+    }
 
 
     //Delete Student//Delete Student//Http Request-->DELETE//Endpoints-->/api/students/delete/{id}
