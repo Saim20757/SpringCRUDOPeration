@@ -14,11 +14,13 @@ public class StudentService {
         this.studentRepository = studentRepository;
     }
 
-    public Student createdStudent(Student studentreq){
+    public Student createStudent(Student studentreq){
       //Store To db
         // Business logic
-        System.out.println("Inside Service");
+        System.out.println("Inside Student Service");
+
     Student studentres =studentRepository.saveStudent(studentreq);
+        System.out.println("Exiting  Student Service");
     return  studentres;
     }
 

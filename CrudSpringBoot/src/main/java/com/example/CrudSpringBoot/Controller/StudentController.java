@@ -5,9 +5,11 @@ import com.example.CrudSpringBoot.Service.StudentService;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController("/api/students")
+@RestController
+@RequestMapping("/api/students")
 public class StudentController {
 
     private StudentService studentService;
@@ -18,10 +20,13 @@ public class StudentController {
 
     //Create Student //HTTP Request--> Post //End Point -->/api/students/create
     @PostMapping("/create")
-    public String createStudent(@RequestBody Student student){
-       Student createdStudent=studentService.createdStudent(student);
-        System.out.println("Inside Controller");
-       return "Student created" ;
+    public Student createStudent(@RequestBody Student student){
+//        System.out.println(student.getName()+student.getEmail());
+        System.out.println("Inside Student Controller");
+        Student createdStudent=studentService.createStudent(student);
+
+        System.out.println("Existing Student Controller");
+       return createdStudent ;
 
     }
     //Read Student//Read One//HTTp Request-->GET //End point -->/api/students/get/{id}
