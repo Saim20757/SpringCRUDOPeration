@@ -22,7 +22,7 @@ public class StudentController {
     @PostMapping("/create")
     public Student createStudent(@RequestBody Student student){
 //        System.out.println(student.getName()+student.getEmail());
-
+        student.setDeleted(false);
         Student createdStudent=studentService.createStudent(student);
 
 
@@ -66,6 +66,17 @@ public class StudentController {
         }
         return ResponseEntity.ok("Record Deleted");
     }
+    //Soft Delete-->//HTTPS Method -->Patch//Endpoints-->/api/students/delete-soft/{id}
+    @PatchMapping("/delete-soft/{id}")
+    public ResponseEntity<String> deleteStudentSoftly(@PathVariable Long id){
+        Boolean isDeleted=studentService.deleteStudentSoftly(id);
+        if (!isDeleted){
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok("Record Deleted");
+
+    }
+
 
 
 }

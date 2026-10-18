@@ -27,7 +27,8 @@ public class StudentService {
     return  studentres;
     }
     public Student getStudent(Long id){
-        Optional<Student> studentResp=studentRepository.findById(id);
+        Optional<Student> studentResp=studentRepository.findByIdAndDeletedIsFalse(id);
+
         if (studentResp.isPresent()){
             return studentResp.get();
         }
@@ -35,7 +36,7 @@ public class StudentService {
 
     }
     public List<Student> getAllStudent(){
-        List<Student> studentList=studentRepository.findAll();
+        List<Student> studentList=studentRepository.findByDeletedIsFalse();
         return studentList;
 
     }
@@ -51,6 +52,7 @@ public class StudentService {
         studentToSave.setRollNumber(studentReq.getRollNumber());
         studentToSave.setSubject(studentReq.getSubject());
         studentToSave.setAge(studentReq.getAge());
+        studentToSave.setDeleted(false);
 
         return studentRepository.save(studentToSave);
     }
@@ -61,6 +63,21 @@ public class StudentService {
             return false;
         }
         studentRepository.deleteById(id);
+        return true;
+    }
+    public Boolean deleteStudentSoftly( Long id){
+        //Record Get
+        //delete=1
+
+        Optional<Student> existingStudent=
+                studentRepository.findByIdAndDeletedIsFalse(id);
+
+        if (existingStudent.isEmpty()){
+            return false;
+        }
+        Student studentToSave =existingStudent.get();
+        studentToSave.setDeleted(true);
+        studentRepository.save(studentToSave);
         return true;
     }
 
